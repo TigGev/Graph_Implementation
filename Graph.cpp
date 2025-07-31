@@ -1,7 +1,7 @@
 #include <Graph.h>
 
 void Graph::addVertex(int vertex) {
-    if (adjList.find(vertex) != adjList.end()) {
+    if (adjList.find(vertex) == adjList.end()) {
         adjList[vertex] = std::vector<int>();
     }
 }
@@ -55,4 +55,47 @@ bool Graph::hasEdge(int src, int dest) const {
     }
 
     return false;
+}
+
+void dfsHelper(const Graph& gp, int vertex, std::unordered_set<int>& visited) {
+    visited.insert(vertex);
+    std::cout << vertex << " ";
+
+    auto it = gp.adjList.find(vertex);
+    if (it != gp.adjList.end()) {
+        for (int v : it->second) {
+            if (visited.find(v) == visited.end()) {
+                dfsHelper(gp, v, visited);
+            }
+        }
+    }
+}
+
+void Graph::dfs() const {
+    std::unordered_set<int> visited;
+    for (const auto& v : adjList) {
+        if (visited.find(v.first) == visited.end()) {
+            dfsHelper(*this, v.first, visited);
+        }
+    }
+    std::cout << std::endl;
+}
+
+int main() {
+    Graph gp;
+    gp.addVertex(0);
+    gp.addVertex(1);
+    gp.addVertex(2);
+    gp.addVertex(3);
+    gp.addVertex(4);
+    gp.addVertex(5);
+
+    gp.addEdge(0, 1);
+    gp.addEdge(0, 2);
+    gp.addEdge(0, 3);
+    gp.addEdge(2, 3);
+    gp.addEdge(1, 4);
+    gp.addEdge(3, 5);
+
+    gp.dfs();
 }
