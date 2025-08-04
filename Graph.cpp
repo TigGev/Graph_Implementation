@@ -76,10 +76,42 @@ void Graph::dfs() const {
     for (const auto& v : adjList) {
         if (visited.find(v.first) == visited.end()) {
             dfsHelper(*this, v.first, visited);
+            std::cout << std::endl; //separate components
         }
     }
     std::cout << std::endl;
 }
+
+void bfsHelper(const Graph& gp, int vertex, std::unordered_set<int>& visited) {
+    std::queue<int> q;
+    visited.insert(vertex);
+    q.push(vertex);
+    while (!q.empty()) {
+        int u = q.front();
+        std::cout << u << " ";
+        q.pop();
+        auto it = gp.adjList.find(u);
+        if (it != gp.adjList.end()) {
+            for (int v : it->second) {
+                if (visited.find(v) == visited.end()) {
+                    q.push(v);
+                    visited.insert(v);
+                }
+            }
+        }
+    }
+}
+
+void Graph::bfs() const {
+    std::unordered_set<int> visited;
+    for (const auto& v : adjList) {
+        if (visited.find(v.first) == visited.end()) {
+            bfsHelper(*this, v.first, visited);
+            std::cout << std::endl; //separate components
+        }
+    }
+}
+
 
 int main() {
     Graph gp;
@@ -97,5 +129,11 @@ int main() {
     gp.addEdge(1, 4);
     gp.addEdge(3, 5);
 
+    gp.addEdge(6, 7);
+    gp.addEdge(8, 9);
+    gp.addEdge(10, 11);
+
     gp.dfs();
+    std::cout << "Bfs\n";
+    gp.bfs();
 }

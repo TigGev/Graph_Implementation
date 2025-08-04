@@ -3,6 +3,8 @@
 #include <vector>
 #include <unordered_map>
 #include <unordered_set>
+#include <map>
+#include <queue>
 #include <iostream>
 
 // void dfs();
@@ -14,11 +16,12 @@
 class Graph {
     private:
         bool isDirected;
-        std::unordered_map<int, std::vector<int>> adjList;
+        std::map<int, std::vector<int>> adjList;
+        // std::unordered_map<int, std::vector<int>> adjList;
 
     
         friend void dfsHelper(const Graph& gp, int vertex, std::unordered_set<int>& visited);
-        friend void bfs(Graph& gp);
+        friend void bfsHelper(const Graph& gp, int vertex, std::unordered_set<int>& visited);
         friend int getNumComponents(Graph& gp);
         friend bool hasCycle(Graph& gp);
     public:
@@ -31,6 +34,8 @@ class Graph {
         bool hasEdge(int src, int dest) const;
 
         void dfs() const;
+        void bfs() const;
+
 };
 
 #endif
