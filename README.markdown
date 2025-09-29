@@ -1,6 +1,5 @@
 # Graph Implementation
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/TigGev/Graph_Implementation/blob/main/LICENSE)
 [![Language: C++](https://img.shields.io/badge/language-C%2B%2B-blue.svg)](https://github.com/TigGev/Graph_Implementation)
 [![Project Status](https://img.shields.io/badge/status-active-brightgreen.svg)](https://github.com/TigGev/Graph_Implementation)
 [![GitHub Stars](https://img.shields.io/github/stars/TigGev/Graph_Implementation.svg?style=social)](https://github.com/TigGev/Graph_Implementation/stargazers)
